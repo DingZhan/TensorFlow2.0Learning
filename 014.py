@@ -10,9 +10,25 @@ train_data = np.expand_dims(train_data.astype(np.float32)/255.0, axis=-1)
 #构建数据集
 mnist_dataset = tf.data.Dataset.from_tensor_slices((train_data, train_label))
 
-#如何切换到下一副训练集合图片?
-for image, label in mnist_dataset:
-    plot.title(label.numpy())
-    plot.imshow(image.numpy()[:,:,0])
-    plot.show()
-    
+singleShow = False
+
+if singleShow:
+    #如何不关闭窗口切换到下一副训练集合图片,只能通过关闭方式吗?
+    for image, label in mnist_dataset:
+        plot.title(label.numpy())
+        plot.imshow(image.numpy()[:,:,0])
+        plot.show()
+        
+else:
+    row = 4
+    col = 6
+    mnist_dataset = mnist_dataset.batch(row*col)
+    for images, labels in mnist_dataset:    # image: [4, 28, 28, 1], labels: [4]
+        k = 0
+        fig, axs = plot.subplots(row, col)
+        for i in range(row):
+            for j in range(col):
+                axs[i][j].set_title(labels.numpy()[k])
+                axs[i][j].imshow(images.numpy()[k, :, :, 0])
+                k = k+1
+        plot.show()
