@@ -23,6 +23,8 @@ else:
     row = 4
     col = 6
     mnist_dataset = mnist_dataset.batch(row*col)
+    #打散数据集
+    #mnist_dataset = mnist_dataset.shuffle(buffer_size=10000).batch(4)
     for images, labels in mnist_dataset:    # image: [4, 28, 28, 1], labels: [4]
         k = 0
         fig, axs = plot.subplots(row, col)
