@@ -1,4 +1,5 @@
 #tf基础：用cat_vs_dogs数据集，但是貌似最后是Resource exhausted，是否不适合在CPU上运行这个sample？
+#训练集下载地址 https://www.floydhub.com/fastai/datasets/cats-vs-dogs
 import tensorflow as tf
 import numpy as np
 import os
